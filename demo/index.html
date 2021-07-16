@@ -47,7 +47,8 @@
 </head>
 
 <body>
-  <div id="editorjs" class="row"></div>
+  <div id="editorjs" style="border:1px solid blue" class="row"></div>
+  <div id="editorjs1" style="border:1px solid red" class="row"></div>
   <div id="app" class="row"></div>
   <script src="../src/json2bootgrid.js"></script>
   <script>
@@ -60,14 +61,9 @@
             ]
    
       }
-      
-	  
-	  
-	   
-	   $("#app.row").sortable();
-	   
-	   
-	   
+       
+	   //$("#app.row").sortable();
+	   //$("#app.row").sortable( "destroy" );
 	   
     }
 	
@@ -78,7 +74,7 @@
 				{
 					text: '<div id="'+holderid+'">hello</div>',
 					width: width,
-					color: 'green'
+					color: 'white'
 				}
 			)
 			document.getElementById('app').innerHTML = json2bootgrid(a);
@@ -114,10 +110,6 @@
 </div>
 <div class="ce-example__output">
   <pre class="ce-example__output-content" id="output"></pre>
-
-  <div class="ce-example__output-footer">
-	<a href="https://codex.so" style="font-weight: bold;">Made by CodeX</a>
-  </div>
 </div>
 
 
@@ -145,15 +137,15 @@
      * @see docs/installation.md for mode details
      */
 	 var editors = [];
-	 
+	 let currentEditor;
 	function createEditor(holder) {
-		let currentEditor = editors.length;
+		currentEditor = editors.length;
 		//editors[currentEditor] = 0;
-		let editor = new EditorJS({
+		editors[currentEditor] = new EditorJS({
 		  /**
 		   * Enable/Disable the read only mode
 		   */
-		  readOnly: false,
+		  //readOnly: false,
 
 		  /**
 		   * Wrapper of Editor
@@ -254,16 +246,16 @@
 		  },
 		  onReady: function(e){
 		  
-		  let temp = [editor];
-		  console.log('onReady',temp)
-		  editors[currentEditor] = editor
-			saveButton.click();
+		  //let temp = [editor];
+		  //console.log('onReady',temp)
+		  //editors[currentEditor] = editor
+			//saveButton.click();
 		  },
 		  onChange: function(api, block) {
 			console.log('something changed', block);
 		  }
 		});
-		console.log(editor.isReady)
+		//console.log(editor.isReady)
 		
 	}
 
@@ -281,7 +273,7 @@
     /**
      * Saving example
      */
-    /*saveButton.addEventListener('click', function () {
+    saveButton.addEventListener('click', function () {
       editors[currentEditor].save()
         .then((savedData) => {
           cPreview.show(savedData, document.getElementById("output"));
@@ -289,16 +281,16 @@
         .catch((error) => {
           console.error('Saving error', error);
         });
-    });*/
+    });
 
     /**
      * Toggle read-only example
      */
-    /*toggleReadOnlyButton.addEventListener('click', async () => {
+    toggleReadOnlyButton.addEventListener('click', async () => {
       const readOnlyState = await editors[currentEditor].readOnly.toggle();
 
       readOnlyIndicator.textContent = readOnlyState ? 'On' : 'Off';
-    });*/
+    });
 	
 	const cPreview = (function (module) {
 	  /**
