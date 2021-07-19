@@ -3,8 +3,8 @@ class Parser {
         return '<div class="row">' + this.parse(r) + '</div>';
     }
 
-    createColumn(c) {
-        return '<div style="background-color : ' + c.color + '" class="col-lg-' + c.width + '">' + (c.text ? c.text : '') + this.parse(c) + '</div>';
+    createColumn(c, i) {
+        return '<div id="'+ i +'" style="background-color : ' + c.color + '" class="col-lg-' + c.width + '">' + (c.text ? c.text : '') + this.parse(c) + '</div>';
     }
 
     parse(s) {
@@ -18,7 +18,7 @@ class Parser {
         }
         if (s.columns) {
             for (let i in s.columns) {
-                S += this.createColumn(s.columns[i]);
+                S += this.createColumn(s.columns[i],parseInt(i)+1);
             }
         }
         return S;
