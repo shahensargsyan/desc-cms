@@ -47,46 +47,41 @@
 </head>
 
 <body>
-  <div id="editorjs" style="border:1px solid blue" class="row"></div>
-  <div id="editorjs1" style="border:1px solid red" class="row"></div>
-  <div id="app" class="row"></div>
-    
-  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<div id="editorjs" style="border:1px solid blue" class="row"></div>
+	<div id="editorjs1" style="border:1px solid red" class="row"></div>
+	<div id="app" class="row"></div>
 
-  <script src="../src/json2bootgrid.js"></script>
-  <script>
-  let a = {columns:[]}
-  let b = {columns:[]} 
-    window.onload = () => {
-      
-       
-	   /*var $sortableList = $("#app.row");
-	   
-	   $sortableList.sortable({
-			//stop: sortEventHandler
-		});
-		var listElements = $sortableList.children();
-		console.log(listElements); 
-		var listValues = [];
+	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
-		listElement.forEach(function(element){
-			listValues.push(element.innerHTML);
-		});
-
-		console.log(listValues);*/
-	   //$("#app.row").sortable( "destroy" );
-	   
-    }
-	/*
-	var $sortableList = $("#app.row");
-	$sortableList.sortable();
-	let sorted = $sortableList.sortable("toArray")
+	<script src="../src/json2bootgrid.js"></script>
+  
+  
+    <!-- MDB -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
 
 
+	<script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script><!-- Header -->
+	<script src="https://cdn.jsdelivr.net/npm/@editorjs/simple-image@latest"></script><!-- Image -->
+	<script src="https://cdn.jsdelivr.net/npm/@editorjs/delimiter@latest"></script><!-- Delimiter -->
+	<script src="https://cdn.jsdelivr.net/npm/@editorjs/list@latest"></script><!-- List -->
+	<script src="https://cdn.jsdelivr.net/npm/@editorjs/checklist@latest"></script><!-- Checklist -->
+	<script src="https://cdn.jsdelivr.net/npm/@editorjs/quote@latest"></script><!-- Quote -->
+	<script src="https://cdn.jsdelivr.net/npm/@editorjs/code@latest"></script><!-- Code -->
+	<script src="https://cdn.jsdelivr.net/npm/@editorjs/embed@latest"></script><!-- Embed -->
+	<script src="https://cdn.jsdelivr.net/npm/@editorjs/table@latest"></script><!-- Table -->
+	<script src="https://cdn.jsdelivr.net/npm/@editorjs/link@latest"></script><!-- Link -->
+	<script src="https://cdn.jsdelivr.net/npm/@editorjs/warning@latest"></script><!-- Warning -->
+
+	<script src="https://cdn.jsdelivr.net/npm/@editorjs/marker@latest"></script><!-- Marker -->
+	<script src="https://cdn.jsdelivr.net/npm/@editorjs/inline-code@latest"></script><!-- Inline Code -->
+
+	<!-- Load Editor.js's Core -->
+	<script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
 	
-	
-	*/
+<script>
+	let a = {columns:[]}
+	let b = {columns:[]} 
 
 	function getKeyByValue(object, value) {
 		  return Object.keys(object).find(key => object[key].key === value);
@@ -129,7 +124,7 @@
 			)
 			document.getElementById('app').innerHTML = json2bootgrid(a);
 			a.columns[a.columns.length-1].editor = createEditor(holderEl);
-   }	
+   }
 	/**
      * Saving tabs with editor data
      */	   
@@ -152,6 +147,8 @@
 	}
 	
 	function reRenderCals() {
+	
+		document.getElementById('app').innerHTML = json2bootgrid(a);
 		a.columns.forEach(function(col,index) {
 			$('#'+a.columns[index].id).html('');
 				a.columns[index].editor = createEditor(a.columns[index].id, JSON.parse(a.columns[index].output));
@@ -162,94 +159,16 @@
 	function encodeHTMLEntities(string) {
 		return string.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 	}
-	   
-	/*function addCol(width) {
-			holderid = parseInt(a.columns.length)+1;
-			holderid = 'col-'+holderid;
-			a.columns.push(
-				{
-					text: '<div id="'+holderid+'">hello</div>',
-					width: width,
-					color: 'white'
-				}
-			)
-			b.columns = [
-				{
-					text: '<div id="'+holderid+'">hello</div>',
-					width: width,
-					color: 'white'
-				}
-			]
 
-document.getElementById('app').innerHTML += json2bootgrid(b);
-
-			//document.getElementById('app').appendChild(json2bootgrid(b));
-			createEditor(holderid)
-	   }*/
-  </script>
-
-  <!-- MDB -->
-<script
-  type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"
-></script>
-
-<div class="ce-example__content _ce-example__content--small">
-  <div id="editorjs"></div>
-
-  <div class="ce-example__button" id="saveButton">
-	editor.save()
-  </div>
-
-  <div class="ce-example__statusbar">
-	Readonly:
-	<b id="readonly-state">
-	  Off
-	</b>
-	<div class="ce-example__statusbar-button" id="toggleReadOnlyButton">
-	  toggle
-	</div>
-  </div>
-</div>
-<div class="ce-example__output">
-  <pre class="ce-example__output-content" id="output"></pre>
-</div>
-
-
-  <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script><!-- Header -->
-  <script src="https://cdn.jsdelivr.net/npm/@editorjs/simple-image@latest"></script><!-- Image -->
-  <script src="https://cdn.jsdelivr.net/npm/@editorjs/delimiter@latest"></script><!-- Delimiter -->
-  <script src="https://cdn.jsdelivr.net/npm/@editorjs/list@latest"></script><!-- List -->
-  <script src="https://cdn.jsdelivr.net/npm/@editorjs/checklist@latest"></script><!-- Checklist -->
-  <script src="https://cdn.jsdelivr.net/npm/@editorjs/quote@latest"></script><!-- Quote -->
-  <script src="https://cdn.jsdelivr.net/npm/@editorjs/code@latest"></script><!-- Code -->
-  <script src="https://cdn.jsdelivr.net/npm/@editorjs/embed@latest"></script><!-- Embed -->
-  <script src="https://cdn.jsdelivr.net/npm/@editorjs/table@latest"></script><!-- Table -->
-  <script src="https://cdn.jsdelivr.net/npm/@editorjs/link@latest"></script><!-- Link -->
-  <script src="https://cdn.jsdelivr.net/npm/@editorjs/warning@latest"></script><!-- Warning -->
-
-  <script src="https://cdn.jsdelivr.net/npm/@editorjs/marker@latest"></script><!-- Marker -->
-  <script src="https://cdn.jsdelivr.net/npm/@editorjs/inline-code@latest"></script><!-- Inline Code -->
-
-  <!-- Load Editor.js's Core -->
-  <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
-  
-  <script>
     /**
      * To initialize the Editor, create a new instance with configuration object
      * @see docs/installation.md for mode details
      */
-	 var editors = [];
-	 let currentEditor;
+	var editors = [];
+	let currentEditor;
 	function createEditor(holder, data = []) {
 		currentEditor = editors.length;
-		//editors[currentEditor] = 0;
 		editors[currentEditor] = new EditorJS({
-		  /**
-		   * Enable/Disable the read only mode
-		   */
-		  //readOnly: false,
-
 		  /**
 		   * Wrapper of Editor
 		   */
@@ -337,98 +256,15 @@ document.getElementById('app').innerHTML += json2bootgrid(b);
 		   * Initial Editor data
 		   */
 		  data: data,
-		  onReady: function(e){
-		  
-		  //let temp = [editor];
-		  //console.log('onReady',temp)
-		  //editors[currentEditor] = editor
-			//saveButton.click();
-		  },
+		  onReady: function(e){},
 		  onChange: function(api, block) {
+			saveDesc();
 			console.log('something changed', block);
 		  }
 		});
 		
 		return editors[currentEditor];
-		//console.log(editor.isReady)
-		
 	}
-
-    /**
-     * Saving button
-     */
-    const saveButton = document.getElementById('saveButton');
-
-    /**
-     * Toggle read-only button
-     */
-    const toggleReadOnlyButton = document.getElementById('toggleReadOnlyButton');
-    const readOnlyIndicator = document.getElementById('readonly-state');
-
-    /**
-     * Saving example
-     */
-    saveButton.addEventListener('click', function () {
-      editors[currentEditor].save()
-        .then((savedData) => {
-          cPreview.show(savedData, document.getElementById("output"));
-        })
-        .catch((error) => {
-          console.error('Saving error', error);
-        });
-    });
-
-    /**
-     * Toggle read-only example
-     */
-    toggleReadOnlyButton.addEventListener('click', async () => {
-      const readOnlyState = await editors[currentEditor].readOnly.toggle();
-
-      readOnlyIndicator.textContent = readOnlyState ? 'On' : 'Off';
-    });
-	
-	const cPreview = (function (module) {
-	  /**
-	   * Shows JSON in pretty preview
-	   * @param {object} output - what to show
-	   * @param {Element} holder - where to show
-	   */
-	  module.show = function(output, holder) {
-		/** Make JSON pretty */
-		output = JSON.stringify( output, null, 4 );
-		/** Encode HTML entities */
-		output = encodeHTMLEntities( output );
-		/** Stylize! */
-		output = stylize( output );
-		holder.innerHTML = output;
-	  };
-
-	  /**
-	   * Converts '>', '<', '&' symbols to entities
-	   */
-	  function encodeHTMLEntities(string) {
-		return string.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-	  }
-
-	  /**
-	   * Some styling magic
-	   */
-	  function stylize(string) {
-		/** Stylize JSON keys */
-		string = string.replace( /"(\w+)"\s?:/g, '"<span class=sc_key>$1</span>" :');
-		/** Stylize tool names */
-		string = string.replace( /"(paragraph|quote|list|header|link|code|image|delimiter|raw|checklist|table|embed|warning)"/g, '"<span class=sc_toolname>$1</span>"');
-		/** Stylize HTML tags */
-		string = string.replace( /(&lt;[\/a-z]+(&gt;)?)/gi, '<span class=sc_tag>$1</span>' );
-		/** Stylize strings */
-		string = string.replace( /"([^"]+)"/gi, '"<span class=sc_attr>$1</span>"' );
-		/** Boolean/Null */
-		string = string.replace( /\b(true|false|null)\b/gi, '<span class=sc_bool>$1</span>' );
-		return string;
-	  }
-
-	  return module;
-	})({});
   </script>
 </body>
 
